@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>珈琲ロマン Coffee Roman | 沖縄市 自家焙煎珈琲と自家製ケーキ</title>
+
+  <!-- ========= Tailwind ========= -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ========= Google Fonts ========= -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Pacifico&family=Satisfy&family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ========= Custom Style ========= -->
+  <style>
+    body, button, a { font-family: 'Noto Sans JP', 'Poppins', sans-serif; }
+    .logo {
+      font-family: 'Pacifico', cursive;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    .faq-item { border-bottom: 1px solid #e5e7eb; }
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-content.active {
+      max-height: 300px;
+      transition: max-height 0.3s ease-in;
+    }
+
+    /* Hamburger menu styles */
+    .hamburger-line {
+      width: 25px;
+      height: 2px;
+      background-color: white;
+      transition: all 0.3s ease;
+      margin: 4px 0;
+    }
+
+    /* Mobile menu slide animation */
+    .mobile-menu-enter {
+      transform: translateX(100%);
+    }
+
+    .mobile-menu-enter-active {
+      transform: translateX(0);
+      transition: transform 0.3s ease-out;
+    }
+
+    .mobile-menu-exit {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-exit-active {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in;
+    }
+
+    /* セクションのスクロール位置調整 */
+    .scroll-offset {
+      scroll-margin-top: 120px; /* ヘッダーの高さ + 余白 */
+    }
+
+    /* モバイル用のオフセット調整 */
+    @media (max-width: 768px) {
+      .scroll-offset {
+        scroll-margin-top: 100px;
+      }
+    }
+  </style>
+</head>
+<body class="text-neutral-800 leading-relaxed antialiased">
+
+<!-- =================== Header =================== -->
+<header id="top" class="fixed inset-x-0 top-0 z-50 bg-black/20 backdrop-blur-sm">
+  <div class="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-6">
+    <!-- Logo -->
+    <h1 class="logo text-4xl text-white tracking-wider select-none">Coffee Roman</h1>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex gap-8 text-xs uppercase tracking-widest text-white">
+      <a href="#hero"         class="hover:text-amber-200 transition-colors">Home</a>
+      <a href="#instagram"   class="hover:text-amber-200 transition-colors">Instagram</a>
+      <a href="#notes"    class="hover:text-amber-200 transition-colors">Notes</a>
+      <a href="#faq"        class="hover:text-amber-200 transition-colors">FAQ</a>
+      <a href="#parking"     class="hover:text-amber-200 transition-colors">Parking</a>
+      <a href="#contact"     class="hover:text-amber-200 transition-colors">INFO</a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button id="menuBtn" class="md:hidden flex flex-col justify-center items-center w-8 h-8">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </button>
+  </div>
+
+</header>
+
+<!-- Mobile Nav -->
+<div id="mobileNav" class="fixed inset-0 z-[60] hidden">
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="mobileOverlay"></div>
+
+  <!-- Slide-in Panel from right -->
+  <div class="absolute right-0 top-0 h-full w-[280px] bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 text-amber-900 shadow-2xl flex flex-col z-[60] transform translate-x-full transition-transform duration-300 ease-out border-l-4 border-amber-300"
+       id="mobilePanel">
+
+    <!-- Close button -->
+    <div class="flex justify-end p-4">
+      <button id="closeNav" class="w-10 h-10 flex items-center justify-center rounded-full bg-amber-100 hover:bg-amber-200 text-amber-800 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Logo in mobile menu -->
+    <div class="px-6 mb-8">
+      <h2 class="logo text-2xl text-amber-800">Coffee Roman</h2>
+      <p class="text-xs text-amber-600 mt-1 tracking-widest">COFFEE & CAFE</p>
+    </div>
+
+    <!-- Navigation links -->
+    <nav class="flex-1 px-6">
+      <div class="space-y-6">
+        <a href="#hero" class="mobile-link block text-lg font-medium text-amber-800 hover:text-amber-600 hover:translate-x-2 transition-all duration-200 border-b border-amber-200 pb-3">
+            <span class="flex items-center">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+              </svg>
+              Home
+            </span>
+        </a>
+        <a href="#instagram" class="mobile-link block text-lg font-medium text-amber-800 hover:text-amber-600 hover:translate-x-2 transition-all duration-200 border-b border-amber-200 pb-3">
+            <span class="flex items-center">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+              Instagram
+            </span>
+        </a>
+        <a href="#notes" class="mobile-link block text-lg font-medium text-amber-800 hover:text-amber-600 hover:translate-x-2 transition-all duration-200 border-b border-amber-200 pb-3">
+            <span class="flex items-center">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Notes
+            </span>
+        </a>
+        <a href="#faq" class="mobile-link block text-lg font-medium text-amber-800 hover:text-amber-600 hover:translate-x-2 transition-all duration-200 border-b border-amber-200 pb-3">
+            <span class="flex items-center">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              FAQ
+            </span>
+        </a>
+        <a href="#parking" class="mobile-link block text-lg font-medium text-amber-800 hover:text-amber-600 hover:translate-x-2 transition-all duration-200 border-b border-amber-200 pb-3">
+            <span class="flex items-center">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+              Parking
+            </span>
+        </a>
+        <a href="#contact" class="mobile-link block text-lg font-medium text-amber-800 hover:text-amber-600 hover:translate-x-2 transition-all duration-200 border-b border-amber-200 pb-3">
+            <span class="flex items-center">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              INFO
+            </span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<!-- =================== Hero =================== -->
+<section id="hero" class="relative h-[100vh] flex items-center justify-center text-center">
+  <!-- Background Image -->
+  <img src="hero_roman.jpg"
+       alt="Coffee Roman interior" class="absolute inset-0 w-full h-full object-cover object-center scale-100">
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/40"></div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 text-white space-y-6 px-4">
+    <!-- Main Logo -->
+    <h2 class="logo text-7xl leading-none select-none drop-shadow-lg">Coffee Roman</h2>
+    <p class="tracking-widest text-sm mt-4">COFFEE&nbsp;&amp;&nbsp;CAFE</p>
+
+    <!-- Business Hours & Locations -->
+    <div class="text-xs leading-6 space-y-2">
+      <p class="tracking-wider">どこか懐かしく少し新しい町の喫茶店<br>自家焙煎珈琲と軽食&おやつ</p>
+      <p class="tracking-wider">BUSINESS&nbsp;HOURS<br><span class="text-lg tracking-[0.3em]">水・木・金 9:00-17:00<br>土 9:00-18:00</span><br><em>※毎月の🗓️をInstagramでチェック</em></p>
+      <p>沖縄県沖縄市上地2-14-20 1F</p>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a id="booking" href="#contact" class="inline-block px-10 py-3 border border-white rounded-full font-medium tracking-widest hover:bg-white hover:text-amber-700 transition-all duration-300">CONTACT&nbsp;US</a>
+    </div>
+
+    <!-- Down Arrow -->
+    <a href="#instagram" class="mt-10 inline-block animate-bounce">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- =================== Instagram Grid =================== -->
+<section id="instagram" class="py-16 px-4 scroll-offset">
+  <div class="max-w-screen-xl mx-auto">
+    <h3 class="text-center tracking-[0.3em] text-sm font-semibold mb-10">INSTAGRAM</h3>
+
+    <!-- Masonry-ish grid using columns -->
+    <div class="columns-2 sm:columns-3 md:columns-4 gap-4 space-y-4">
+      <!-- 16 sample images -->
+      <img class="w-full rounded-lg" src="01.jpg" alt>
+      <img class="w-full rounded-lg" src="02.jpg" alt>
+      <img class="w-full rounded-lg" src="03.jpg" alt>
+      <img class="w-full rounded-lg" src="04.jpg" alt>
+      <img class="w-full rounded-lg" src="05.jpg" alt>
+      <img class="w-full rounded-lg" src="06.jpg" alt>
+      <img class="w-full rounded-lg" src="07.jpg" alt>
+      <img class="w-full rounded-lg" src="08.jpg" alt>
+      <img class="w-full rounded-lg" src="09.jpg" alt>
+      <img class="w-full rounded-lg" src="10.jpg" alt>
+      <img class="w-full rounded-lg" src="11.jpg" alt>
+      <img class="w-full rounded-lg" src="12.jpg" alt>
+      <img class="w-full rounded-lg" src="13.jpg" alt>
+      <img class="w-full rounded-lg" src="14.jpg" alt>
+      <img class="w-full rounded-lg" src="15.jpg" alt>
+      <img class="w-full rounded-lg" src="16.jpg" alt>
+    </div>
+  </div>
+</section>
+
+<!-- =================== 注意事項 =================== -->
+<section id="notes" class="py-20 bg-gray-50 scroll-offset">
+  <div class="max-w-screen-sm mx-auto space-y-10 px-4 text-center">
+    <h3 class="text-sm font-semibold tracking-[0.3em]">注意事項 / IMPORTANT NOTES</h3>
+
+    <p class="text-sm leading-7">
+      当店は小さな町の喫茶店です。<br>
+      くつろぐ空間それぞれの肩にのんびりしていってほしいという私たちの思いがあります。<br>
+      空間も狭い為、大人数だと半貸切状態になってしまう為に<strong>店内利用1組4名まで</strong>とさせていただいてます。<br>
+      申し訳ございません。
+    </p>
+
+    <p class="text-sm leading-7">
+      Our cafe is small, so please come and visit us up to 4 people per group.<br>
+      If there are a large number of people came to our cafe, the cafe will be half reserved, so we do not accept it.<br>
+      Thank you for your understanding and cooperation.
+    </p>
+
+    <p class="text-sm leading-7">
+
+      <strong>現金決済のみ</strong><br>
+      <strong>席予約なし</strong><br><br>
+      <em>
+        Cash payment only<br>
+        No seat reservations</em>
+    </p>
+  </div>
+</section>
+
+<!-- =================== よくあるお問い合わせ =================== -->
+<section id="faq" class="py-20 scroll-offset">
+  <div class="max-w-screen-sm mx-auto space-y-10 px-4 text-center">
+    <h3 class="text-sm font-semibold tracking-[0.3em]">よくあるお問い合わせ / FAQ</h3>
+
+    <div class="space-y-4">
+      <!-- FAQ 1 -->
+      <div class="faq-item">
+        <button class="w-full text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow faq-question flex justify-between items-center">
+          <span class="font-medium text-gray-800 flex-1">駐車場はありますか？ / Is there parking available?</span>
+          <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="faq-content overflow-hidden transition-all duration-300 ease-out" style="max-height: 0;">
+          <div class="bg-white px-6 pb-6">
+            <p class="text-sm text-gray-600 leading-relaxed">
+              <br>近くにパーキングがございます。そちらをご利用ください。<br>
+              There is parking nearby. Please use that parking area.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-item">
+        <button class="w-full text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow faq-question flex justify-between items-center">
+          <span class="font-medium text-gray-800 flex-1">お持ち帰りはできますか？ / Can I take food to go?</span>
+          <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-200 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="faq-content overflow-hidden transition-all duration-300 ease-out" style="max-height: 0;">
+          <div class="bg-white px-6 pb-6">
+            <p class="text-sm text-gray-600 leading-relaxed">
+              <br>混み合うタイミングだとお待たせすることもあります。お食事、ケーキやお菓子等の予約や取り置きはお問い合わせください。電話は2人で営んでいる為、出られないこともございます。オープン時間外は繋がりませんのでお急ぎの要件や質問はメッセージくださいね。<br><br>
+              You may have to wait during busy times. Please contact us for reservations or holding meals, cakes, and sweets. Since the phone is operated by two people, we may not be able to answer. We are not connected outside of opening hours, so please message us for urgent matters or questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== 駐車場案内 =================== -->
+<section id="parking" class="py-20 bg-gray-50 scroll-offset">
+  <div class="max-w-screen-lg mx-auto px-4">
+    <div class="text-center mb-12">
+      <h3 class="tracking-[0.3em] text-sm font-semibold mb-4 text-gray-800">駐車場案内 / PARKING INFORMATION</h3>
+    </div>
+
+    <!-- 駐車場案内画像 -->
+    <div class="relative group">
+      <div class="absolute inset-0 bg-gradient-to-r from-amber-200 to-orange-200 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+      <div class="relative bg-white p-6 rounded-lg shadow-xl border border-amber-100">
+        <img src="parking_info.jpg" alt="駐車場案内" class="w-full h-auto rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Contact & Access =================== -->
+<section id="contact" class="py-20 border-t scroll-offset">
+  <div class="max-w-screen-sm mx-auto space-y-10 px-4 text-center">
+    <h3 class="text-sm font-semibold tracking-[0.3em]">Location</h3>
+    <p class="text-sm leading-7">
+      沖縄県沖縄市上地2-14-20 1F<br>
+      2-14-20 Uechi, Okinawa City, Okinawa Prefecture 1F
+    </p>
+
+    <h3 class="text-sm font-semibold tracking-[0.3em]">Contact</h3>
+    <p class="text-sm leading-7">
+      TEL&nbsp; <a href="tel:+819037956518" class="underline hover:text-amber-600">090-3795-6518</a><br>
+      Instagram&nbsp; <a href="https://www.instagram.com/coffeeroman_okinawa/" target="_blank" rel="noopener" class="underline hover:text-amber-600">@coffeeroman_okinawa</a><br>
+      <em>※営業時間外は繋がりません / Outside business hours, phone is not available</em>
+    </p>
+
+    <h3 class="text-sm font-semibold tracking-[0.3em]">Business Hours</h3>
+    <p class="text-sm leading-7">
+      <strong>営業日：</strong> 水・木・金・土<br>
+      <strong>定休日：</strong> 日・月・火<br><br>
+
+      <strong>モーニング/軽食</strong> 9:00 - 11:00<br>
+      <strong>ランチ/お食事</strong> 11:00 - 15:00<br>
+      <strong>閉店時間</strong> 17:00 (土曜は18:00)<br><br>
+
+      <em>Morning/Light meals: 9:00-11:00<br>
+        Lunch/Meals: 11:00-15:00<br>
+        Closing: 17:00 (Sat: 18:00)<br>
+        Closed: Sun, Mon, Tue</em><br><br>
+
+      <strong>※毎月の🗓️をInstagramでチェック</strong><br>
+      <em>※Please check our Instagram for monthly calendar</em>
+    </p>
+
+    <!-- Map Embed -->
+    <div class="w-full h-72 rounded-lg overflow-hidden shadow-lg">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.5234!2d127.8234!3d26.3456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e50f8a8f8a8f8a%3A0x8f8a8f8a8f8a8f8a!2z5rKW57iE55yM5rKW57iE5biC5LiK5ZywMi0xNC0yMA!5e0!3m2!1sja!2sjp!4v1717843526809!5m2!1sja!2sjp"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+  </div>
+</section>
+
+<!-- =================== Footer =================== -->
+<footer class="py-10 text-center text-sm text-neutral-500 bg-white">
+  <a href="https://www.instagram.com/coffeeroman_okinawa/" target="_blank" rel="noopener" class="inline-block p-3 rounded-full hover:bg-neutral-200 transition">
+    <!-- Refined Instagram Icon SVG -->
+    <svg class="w-6 h-6" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M224.1 141c-63.6 0-115.1 51.5-115.1 115.1S160.5 371.3 224.1 371.3 339.2 319.8 339.2 256.1 287.7 141 224.1 141zm0 190.7c-41.8 0-75.7-33.9-75.7-75.7s33.9-75.7 75.7-75.7 75.7 33.9 75.7 75.7-33.9 75.7-75.7 75.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.7-9.9-67.3-36.2-93.5C385.6 29.9 354 21.7 318.3 20 282 18.2 166 18.2 129.7 20 94 21.7 62.4 29.9 36.2 56.2 9.9 82.5 1.7 114 0 149.7-1.8 185.9-1.8 301.9 0 338.2c1.7 35.7 9.9 67.3 36.2 93.5s57.8 34.5 93.5 36.2c36.3 1.8 151.9 1.8 188.2 0 35.7-1.7 67.3-9.9 93.5-36.2s34.5-57.8 36.2-93.5c1.8-36.3 1.8-151.9 0-188.2zm-48.5 224c-7.8 19.6-22.9 34.7-42.5 42.5-29.4 11.7-99.2 9-132.5 9s-103.1 2.6-132.5-9c-19.6-7.8-34.7-22.9-42.5-42.5-11.7-29.4-9-99.2-9-132.5s-2.6-103.1 9-132.5c7.8-19.6 22.9-34.7 42.5-42.5 29.4-11.7 99.2-9 132.5-9s103.1-2.6 132.5 9c19.6 7.8 34.7 22.9 42.5 42.5 11.7 29.4 9 99.2 9 132.5s2.6 103.1-9 132.5z"/>
+    </svg>
+  </a>
+  <p class="mt-4 text-xs">&copy; <span id="year"></span> 珈琲ロマン Coffee Roman. All rights reserved.</p>
+</footer>
+
+<!-- =================== Scripts =================== -->
+<script>
+  // Mobile menu functionality
+  const menuBtn   = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobilePanel = document.getElementById('mobilePanel');
+  const closeNav  = document.getElementById('closeNav');
+  const overlay   = document.getElementById('mobileOverlay');
+  const links     = document.querySelectorAll('.mobile-link');
+
+  function openMenu() {
+    mobileNav.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    // Use setTimeout to ensure proper animation
+    setTimeout(() => {
+      mobilePanel.classList.remove('translate-x-full');
+    }, 10);
+  }
+
+  function closeMenu() {
+    mobilePanel.classList.add('translate-x-full');
+    setTimeout(() => {
+      mobileNav.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }, 300);
+  }
+
+  menuBtn.addEventListener('click', openMenu);
+  closeNav.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  links.forEach(link => link.addEventListener('click', closeMenu));
+
+  // FAQ functionality
+  const faqQuestions = document.querySelectorAll('.faq-question');
+
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const faqItem = question.parentElement;
+      const faqContent = faqItem.querySelector('.faq-content');
+      const faqIcon = question.querySelector('.faq-icon');
+
+      // Check if currently active
+      const isActive = faqContent.style.maxHeight && faqContent.style.maxHeight !== '0px';
+
+      // Close all other FAQs
+      faqQuestions.forEach(otherQuestion => {
+        const otherFaqItem = otherQuestion.parentElement;
+        const otherFaqContent = otherFaqItem.querySelector('.faq-content');
+        const otherFaqIcon = otherQuestion.querySelector('.faq-icon');
+
+        otherFaqContent.style.maxHeight = '0px';
+        otherFaqIcon.classList.remove('rotate-180');
+      });
+
+      // Toggle current FAQ
+      if (!isActive) {
+        faqContent.style.maxHeight = faqContent.scrollHeight + 'px';
+        faqIcon.classList.add('rotate-180');
+      }
+    });
+  });
+
+  // Set current year in footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
